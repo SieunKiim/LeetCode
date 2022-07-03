@@ -5,9 +5,9 @@ class Solution:
             return 1
 
         for i in range(1, len(nums)):
-            wiggle.append(nums[i] - nums[i - 1])
-        while 0 in wiggle:
-            wiggle.remove(0)
+            if nums[i] - nums[i - 1] != 0:
+                wiggle.append(nums[i] - nums[i - 1])
+        
         if len(wiggle) == 0:
             return 1
         count = 2
