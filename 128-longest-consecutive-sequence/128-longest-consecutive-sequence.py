@@ -1,28 +1,28 @@
 import heapq
 class Solution:
-    def longestConsecutive(self, nums):
-        nums = set(nums)
-        best = 0
-        for x in nums:
-            if x - 1 not in nums:
-                y = x + 1
-                while y in nums:
-                    y += 1
-                best = max(best, y - x)
-        return best
-    # def longestConsecutive(self, nums: List[int]) -> int:
-    #     dic = dict()
-    #     for n in nums:
-    #         dic[n] = 1
-    #     Max = 0
-    #     for k in dic:
-    #         temp = k - 1
-    #         while dic.get(temp):
-    #             dic[k] += dic[temp]
-    #             dic[temp] = 0
-    #             temp -= 1
-    #         Max = max(Max, dic[k])
-    #     return Max
+    # def longestConsecutive(self, nums):
+    #     nums = set(nums)
+    #     best = 0
+    #     for x in nums:
+    #         if x - 1 not in nums:
+    #             y = x + 1
+    #             while y in nums:
+    #                 y += 1
+    #             best = max(best, y - x)
+    #     return best
+    def longestConsecutive(self, nums: List[int]) -> int:
+        dic = dict()
+        for n in nums:
+            dic[n] = 1
+        Max = 0
+        for k in dic:
+            temp = k - 1
+            while dic.get(temp):
+                dic[k] += dic[temp]
+                dic[temp] = 0
+                temp -= 1
+            Max = max(Max, dic[k])
+        return Max
         
 #----------------------------------------------------------------------------
         # if len(nums) == 0:
