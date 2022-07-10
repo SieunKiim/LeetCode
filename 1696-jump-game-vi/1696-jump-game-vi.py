@@ -2,20 +2,19 @@ import sys
 import heapq
 class Solution:
     def maxResult(self, nums: List[int], k: int) -> int:
-        n = len(nums)
-        heap_window_k = []
-        dp = [0] * n
-        
-        for i in range(n):
-            dp[i] = nums[i]
-            if i == 0: 
-                heapq.heappush(heap_window_k, (-nums[0], 0))
-                continue
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+        heap = [(-nums[0],0)]
+
+        for i in range(1, len(nums)):
+            while heap:
+                if i - heap[0][1] <= k:
+                    break
+                else:
+                    heapq.heappop(heap)
+            temp = heap[0]
+            num = -temp[0] + nums[i]
+            dp[i] = num
+            heapq.heappush(heap, (-num, i))
                 
-            while heap_window_k[0][1] < i-k:
-                heapq.heappop(heap_window_k)
-            
-            dp[i] += (-heap_window_k[0][0])
-            heapq.heappush(heap_window_k, (-dp[i], i))
-        
-        return dp[n-1]
+        return(dp[-1])
