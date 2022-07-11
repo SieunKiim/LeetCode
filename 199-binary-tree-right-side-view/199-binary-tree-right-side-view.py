@@ -10,18 +10,36 @@ from collections import deque
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         result = []
-        def dfs(tree, deep):
-            if len(result) == deep:
+        def dfs_left(tree, deep):
+            print(tree.val, deep)
+            if len(result) < deep:
                 result.append(tree.val)
-            
-            if tree.right:
-                dfs(tree.right, deep+1)
+            if result[deep-1]:
+                result[deep-1] = tree.val
+                
             if tree.left:
-                dfs(tree.left, deep+1)
+                dfs_left(tree.left, deep+1)
+            if tree.right:
+                dfs_left(tree.right, deep+1)
         
         if root:
-            dfs(root, 0)
+            dfs_left(root,1)
+                
         return result
+                
+        #----------------------------------------------
+#         def dfs(tree, deep): # 오른쪽에서부터 채우기
+#             if len(result) == deep:
+#                 result.append(tree.val)
+            
+#             if tree.right:
+#                 dfs(tree.right, deep+1)
+#             if tree.left:
+#                 dfs(tree.left, deep+1)
+        
+#         if root:
+#             dfs(root, 0)
+#         return result
                 
 #         deque 로 풀었음 ---------------------
 #         result = []
