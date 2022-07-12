@@ -29,12 +29,13 @@ class Solution:
             if used[i] == 0:
                 if temp + matchs[i] < length:
                     used[i] = 1
-                    res = self.dfs(temp + matchs[i], matchs, used, count, length, i+1)
+                    if self.dfs(temp + matchs[i], matchs, used, count, length, i+1):
+                        return True
 
                 elif temp + matchs[i] == length:
                     used[i] = 1
-                    res = self.dfs(0, matchs, used, count-1, length, 0) | res
-                if res:
-                    return res
+                    if self.dfs(0, matchs, used, count-1, length, 0):
+                        return True
+                
                 used[i] = 0
         return res
