@@ -8,9 +8,8 @@ class Solution:
         
         for i in range(m+n, max(n,m), -1):
             temp *= i
-        print(temp)
+        
         for j in  range(min(n,m), 0, -1):
             temp /= j
-        print(temp)
-        print(int(temp))
+        
         return(int(temp))
