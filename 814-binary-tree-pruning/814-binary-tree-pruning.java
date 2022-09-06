@@ -15,18 +15,25 @@
  */
 class Solution {
     public TreeNode pruneTree(TreeNode root) {
-        
-        if(root.left != null){
-            root.left = pruneTree(root.left);
-        }
-        if(root.right != null){
-            root.right = pruneTree(root.right);
-        }
-        
-        if(root.left == null && root.right == null && root.val == 0){
+        if (containsOne(root)){
+            return root;
+        } else {
             return null;
         }
-        return root;
     }
     
+    public boolean containsOne(TreeNode root){
+        if (root == null)
+            return false;
+        
+        
+        if (!containsOne(root.left)){
+            root.left = null;
+        } 
+        if (!containsOne(root.right)){
+            root.right = null;
+        } 
+        
+        return (root.val == 1 || containsOne(root.right) || containsOne(root.left));
+    }
 }
