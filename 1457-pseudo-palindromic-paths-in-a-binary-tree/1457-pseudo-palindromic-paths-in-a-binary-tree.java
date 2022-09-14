@@ -35,7 +35,7 @@ class Solution {
             count += 1;
             return ;
         }
-        HashMap<Integer, Integer> rightPath = new HashMap<>(path);
+        HashMap <Integer, Integer> rightPath = new HashMap<>(path);
         rightPath.put(root.val, (rightPath.getOrDefault(root.val, 0) + 1));
         HashMap<Integer, Integer> leftPath = new HashMap<>(path);
         leftPath.put(root.val, (leftPath.getOrDefault(root.val, 0) + 1));
