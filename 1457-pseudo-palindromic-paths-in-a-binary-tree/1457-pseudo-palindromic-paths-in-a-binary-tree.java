@@ -44,7 +44,7 @@ class Solution {
             }
             return ;
         }
-        if(root.right != null) findPath (root.right);
+        if (root.right != null) findPath (root.right);
         if (root.left != null) findPath(root.left);
         
         if(arr[root.val] == 1){
