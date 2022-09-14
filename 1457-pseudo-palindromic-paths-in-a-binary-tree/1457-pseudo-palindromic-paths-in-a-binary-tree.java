@@ -37,7 +37,7 @@ class Solution {
         }
         HashMap <Integer, Integer> rightPath = new HashMap<>(path);
         rightPath.put(root.val, (rightPath.getOrDefault(root.val, 0) + 1));
-        HashMap<Integer, Integer> leftPath = new HashMap<>(path);
+        HashMap <Integer, Integer> leftPath = new HashMap<>(path);
         leftPath.put(root.val, (leftPath.getOrDefault(root.val, 0) + 1));
         if(root.right != null) findPath(root.right,rightPath);
         if (root.left != null) findPath(root.left, leftPath);
