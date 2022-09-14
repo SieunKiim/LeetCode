@@ -15,34 +15,42 @@
  */
 class Solution {
     int count;
+    int[] arr;
     public int pseudoPalindromicPaths (TreeNode root) {
         count = 0;
-        findPath(root, new HashMap<Integer, Integer>());
+        arr = new int[10];
+        findPath(root);
         return count;
     }
     
-    public void findPath(TreeNode root, HashMap<Integer, Integer> path){
+    public void findPath(TreeNode root){
+        if(arr[root.val] == 1){
+            arr[root.val] = 0;
+        } else{
+            arr[root.val] = 1;
+        }
         if (root.right == null && root.left == null){
-            path.put(root.val, (path.getOrDefault(root.val,0)+1));
-            // System.out.println(path);
+            // System.out.println(Arrays.toString(arr));
             int temp = 0;
-            for(int val: path.values()){
-                if(val %2 != 0) temp += 1;
-                if (temp > 1){
-                    return ;
-                }
+            for(int n : arr){
+                if (n == 1) temp += 1;
+                if (temp > 1) break;
             }
-            count += 1;
+            if(temp <= 1) count += 1;
+            if(arr[root.val] == 1){
+                arr[root.val] = 0;
+            } else{
+                arr[root.val] = 1;
+            }
             return ;
         }
-        HashMap <Integer, Integer> rightPath = new HashMap<>(path);
-        rightPath.put(root.val, (rightPath.getOrDefault(root.val, 0) + 1));
-        HashMap <Integer, Integer> leftPath = new HashMap<>(path);
-        leftPath.put(root.val, (leftPath.getOrDefault(root.val, 0) + 1));
-        if(root.right != null) findPath(root.right,rightPath);
-        if (root.left != null) findPath(root.left, leftPath);
+        if(root.right != null) findPath (root.right);
+        if (root.left != null) findPath(root.left);
         
-        
-    
+        if(arr[root.val] == 1){
+            arr[root.val] = 0;
+        } else{
+            arr[root.val] = 1;
+        }
     }
 }
