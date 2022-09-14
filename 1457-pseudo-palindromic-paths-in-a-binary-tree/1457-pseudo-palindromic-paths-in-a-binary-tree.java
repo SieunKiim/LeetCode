@@ -43,5 +43,6 @@ class Solution {
         if (root.left != null) findPath(root.left, leftPath);
         
         
+    
     }
 }
