@@ -15,7 +15,6 @@ class Solution {
                 map.put(key,temp2);
             }
         }
-        // System.out.println(map);
         for (ArrayList<String> s : map.values()) {
             if(s.size() > 1) result.add(s);
         }
