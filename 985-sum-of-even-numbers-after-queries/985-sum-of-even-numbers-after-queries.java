@@ -5,7 +5,7 @@ class Solution {
         HashSet<Integer> evenIndex = new HashSet<>();
         int evenSum = 0;
         int tempIndex =0;
-        for(int n : nums) {
+        for(int n : nums){
             if(n%2 == 0) {
                 evenIndex.add(tempIndex);
                 evenSum += n;
