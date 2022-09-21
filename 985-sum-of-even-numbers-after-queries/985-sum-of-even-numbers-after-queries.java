@@ -30,7 +30,7 @@ class Solution {
             result[index] = evenSum;
             nums[q[1]] = temp;
             
-            index += 1;
+            index +=1;
         }
         return result;
     }
