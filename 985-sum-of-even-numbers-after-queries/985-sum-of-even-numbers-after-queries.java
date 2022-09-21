@@ -24,8 +24,7 @@ class Solution {
                 }
             }else{
                 if(evenIndex.contains(q[1])) evenSum -= nums[q[1]];
-                evenIndex.remove((Integer)q[1]);
-                
+                evenIndex.remove((Integer)q[1]);  
             }
             
             result[index] = evenSum;
