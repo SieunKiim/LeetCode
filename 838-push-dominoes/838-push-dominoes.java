@@ -1,5 +1,6 @@
 class Solution {
     public String pushDominoes(String dominoes) {
+        // Version 2
         String output = "";
         int size = dominoes.length();
         
@@ -26,19 +27,13 @@ class Solution {
                     target += 1;
                     index -= 1;
                 }
-                
                 if(index >= 0 && check[index] == target) result[index] = ".";
             }
         }
-        // System.out.println(Arrays.toString(result));
         output = String.join("", result);
 
-
         return output;
-        
-        
-        
-        
+//////////////////////////////////////////////////////////////////////////        
         /** Version 1  :  시간초과
         String output = "";
         int size = dominoes.length();
