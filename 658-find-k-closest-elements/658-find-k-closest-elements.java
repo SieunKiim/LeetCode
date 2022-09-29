@@ -17,9 +17,6 @@ class Solution {
             list.add(arr[left]);
             left+=1;
         }
-            
-        
-        
         return list; 
     }
 }
