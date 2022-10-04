@@ -26,7 +26,6 @@ class Solution {
             return false;
         }
         
-        
         if(head.left == null && head.right == null){
             System.out.println(sum+head.val);
             if(sum + head.val == target) return true;
