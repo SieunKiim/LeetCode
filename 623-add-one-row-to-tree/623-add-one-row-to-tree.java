@@ -31,7 +31,6 @@ class Solution {
             head.right = newNodeRight;
             return;
         }
-        
         if(head.left != null) find(head.left, val, depth-1);
         if(head.right != null) find(head.right, val, depth-1);
     }
