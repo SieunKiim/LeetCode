@@ -29,7 +29,7 @@ class Solution {
             TreeNode newNodeRight = new TreeNode(val, null, head.right);
             head.left = newNodeLeft;
             head.right = newNodeRight;
-            return;
+            return ;
         }
         if(head.left != null) find(head.left, val, depth-1);
         if(head.right != null) find(head.right, val, depth-1);
