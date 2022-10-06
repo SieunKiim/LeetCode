@@ -4,7 +4,6 @@ class TimeMap {
     public TimeMap() {
         map = new HashMap<>();
     }
-    
     public void set(String key, String value, int timestamp) {
         TreeMap<Integer, String> temp = map.getOrDefault(key, new TreeMap<>());
         temp.put(timestamp, value);
