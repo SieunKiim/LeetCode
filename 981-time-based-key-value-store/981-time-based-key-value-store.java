@@ -1,6 +1,5 @@
 class TimeMap {
     HashMap<String, TreeMap> map;
-    
     public TimeMap() {
         map = new HashMap<>();
     }
