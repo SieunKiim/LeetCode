@@ -15,9 +15,7 @@
  */
 class Solution {
     HashSet<Integer> group = new HashSet<>();
-    
     public boolean findTarget(TreeNode root, int k) {
-        
         if(group.contains(k-root.val)) return true;
         group.add(root.val);
         boolean result = false;
