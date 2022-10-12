@@ -2,12 +2,13 @@ class Solution {
     public int largestPerimeter(int[] nums) {
         Arrays.sort(nums);
         int n = nums.length;
+        int total = nums[n-2]+nums[n-3];
         for(int i = n-1; i>= 2; i--){
-            int[] temp= Arrays.copyOfRange(nums, i-2, i+1);
-            int max = Arrays.stream(temp).max().getAsInt();
-            int total = Arrays.stream(temp).sum();
-            if(max< total-max)
-                return total;
+            if(nums[i] < total) return total + nums[i];
+            else{
+                if(i == 2){continue;}
+                total += (nums[i-3] - nums[i-1]);
+            }
         }
         return 0;
     }
