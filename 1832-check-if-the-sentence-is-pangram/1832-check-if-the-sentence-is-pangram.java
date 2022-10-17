@@ -9,6 +9,7 @@ class Solution {
                 alpha[now-'a'] = 1;
             }
         }
+        
         if(Arrays.stream(alpha).sum() == 26) return true;
         else return false;
     }
