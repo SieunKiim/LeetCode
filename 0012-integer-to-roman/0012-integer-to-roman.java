@@ -1,30 +1,18 @@
 class Solution {
     public static String intToRoman(int num) {
-        int[] val = { 1000, 500, 100, 50, 10, 5, 1 };
-        String[] roman = { "M", "D", "C", "L", "X", "V", "I" };
-        Deque<String> que = new ArrayDeque<>();
-        for (int i = 0; i < val.length; i++) {
-            int temp = num / val[i];
-            if (temp == 4) {
-                if (!que.isEmpty()&&que.peekLast().equals(roman[i - 1])) {
-                    que.pollLast();
-                    que.add(roman[i]);
-                    que.add(roman[i - 2]);
-                } else {
-                    que.add(roman[i]);
-                    que.add(roman[i - 1]);
-                }
-            } else {
-                for (int r = 0; r < temp; r++) {
-                    que.add(roman[i]);
+        int[] val = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+        String[] code = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+        StringBuilder sb = new StringBuilder();
+        while (num > 0) {
+            for (int i = 0; i < 13; i++) {
+                if (num >= val[i]) {
+                    num -= val[i];
+                    sb.append(code[i]);
+                    break;
                 }
             }
-            num = num % val[i];
         }
-        String result = "";
-        while (!que.isEmpty()) {
-            result += que.poll();
-        }
-        return result;
+
+        return sb.toString();
     }
 }
