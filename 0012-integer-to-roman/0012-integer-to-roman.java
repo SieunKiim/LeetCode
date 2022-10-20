@@ -5,7 +5,9 @@ class Solution {
         StringBuilder sb = new StringBuilder();
         while (num > 0) {
             for (int i = 0; i < 13; i++) {
+                
                 if (num >= val[i]) {
+                    
                     num -= val[i];
                     sb.append(code[i]);
                     break;
