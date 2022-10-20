@@ -6,23 +6,19 @@ class Solution {
         for (int i = 0; i < val.length; i++) {
             int temp = num / val[i];
             if (temp == 4) {
-                
-                    if (!que.isEmpty()&&que.peekLast().equals(roman[i - 1])) {
-                        que.pollLast();
-                        que.add(roman[i]);
-                        que.add(roman[i - 2]);
-                    } else {
-                        que.add(roman[i]);
-                        que.add(roman[i - 1]);
-                    }
-                
-
+                if (!que.isEmpty()&&que.peekLast().equals(roman[i - 1])) {
+                    que.pollLast();
+                    que.add(roman[i]);
+                    que.add(roman[i - 2]);
+                } else {
+                    que.add(roman[i]);
+                    que.add(roman[i - 1]);
+                }
             } else {
                 for (int r = 0; r < temp; r++) {
                     que.add(roman[i]);
                 }
             }
-
             num = num % val[i];
         }
         String result = "";
