@@ -3,6 +3,7 @@ class Solution {
         HashMap<Integer, Integer>preSumMod = new HashMap<>();
         preSumMod.put(0,0);
         int presum = 0;
+        
         for(int i =0 ; i< nums.length;i++){
             presum += nums[i];
             presum = presum%k;
