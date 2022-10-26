@@ -13,7 +13,6 @@ class Solution {
                 preSumMod.put(presum, i+1);
             }
         }
-        
         return false;
     }
 }
