@@ -8,7 +8,7 @@ class Solution {
             presum = presum%k;
             if(preSumMod.containsKey(presum)){
                 int index = preSumMod.get(presum);
-                if(i-index>=1) return true;
+                if(i-index>=1)return true;
             } else {
                 preSumMod.put(presum, i+1);
             }
