@@ -6,8 +6,6 @@ class Solution {
         for(int i =0 ; i< nums.length;i++){
             presum += nums[i];
             presum = presum%k;
-            
-            
             if(preSumMod.containsKey(presum)){
                 int index = preSumMod.get(presum);
                 if(i-index>=1) return true;
@@ -15,8 +13,6 @@ class Solution {
                 preSumMod.put(presum, i+1);
             }
         }
-        
-        
         
         return false;
     }
