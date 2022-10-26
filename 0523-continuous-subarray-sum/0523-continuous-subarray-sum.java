@@ -4,18 +4,15 @@ class Solution {
         preSumMod.put(0,0);
         int presum = 0;
         for(int i =0 ; i< nums.length;i++){
-            // System.out.println(preSumMod);
             presum += nums[i];
-            int target = presum%k;
+            presum = presum%k;
             
             
-            if(preSumMod.containsKey(target)){
-                int index = preSumMod.get(target);
-                // System.out.println(index+" "+i);
-
+            if(preSumMod.containsKey(presum)){
+                int index = preSumMod.get(presum);
                 if(i-index>=1) return true;
             } else {
-                preSumMod.put(target, i+1);
+                preSumMod.put(presum, i+1);
             }
         }
         
