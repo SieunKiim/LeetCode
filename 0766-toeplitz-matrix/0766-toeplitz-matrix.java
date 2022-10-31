@@ -8,6 +8,7 @@ class Solution {
                 if(matrix[i][j] != matrix[i-1][j-1]) return false;
             }
         }
+        
         return true;
     }
 }
