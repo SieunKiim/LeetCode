@@ -14,20 +14,13 @@ class Solution {
     }
     
     public int findPath(int j){
-        for(int i= 0; i <n; i++){
-            if(map[i][j]== 1){
-                if(j == m-1 || map[i][j+1] == -1){
-                    return -1;
-                } else {
-                    j +=1;
-                }
-            } else{
-                if(j == 0 || map[i][j-1] == 1){
-                    return -1;
-                }
-                else{
-                    j -=1;
-                }
+        for (int i= 0; i <n; i++){
+            if (map[i][j]== 1){
+                if(j == m-1 || map[i][j+1] == -1) return -1;
+                else j +=1;
+            } else {
+                if(j == 0 || map[i][j-1] == 1) return -1;
+                else j -=1;
             }
         }
         return j;
