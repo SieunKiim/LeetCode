@@ -3,8 +3,8 @@ class Solution {
         int bag[][]=new int[26][26];
         int count=0;
         for(String word:words){
-            int a=word.charAt(0)- 'a';
-            int b=word.charAt(1)- 'a';
+            int a=word.charAt(0)-'a';
+            int b=word.charAt(1)-'a';
             if(bag[b][a]>0){
                 count+=4;
                 bag[b][a]--;
