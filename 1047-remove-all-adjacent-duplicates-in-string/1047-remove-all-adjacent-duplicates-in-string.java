@@ -4,8 +4,7 @@ class Solution {
         for(int i = 0; i<s.length(); i++){
             char now = s.charAt(i);
             if(stack.isEmpty() || stack.peek() != now) stack.add(now);
-            else
-                stack.pop();
+            else stack.pop();
         }
         StringBuilder sb = new StringBuilder();
         while(!stack.isEmpty()){
