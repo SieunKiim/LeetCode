@@ -1,40 +1,44 @@
 class MedianFinder {
-    ArrayList<Integer> arr = new ArrayList<>();
-    int size= 0;
+    
+    PriorityQueue<Integer> max = new PriorityQueue<>();
+    PriorityQueue<Integer> min = new PriorityQueue<>((o1,o2) -> o2-o1);
+    int smallSize = 0;
+    int bigSize = 0;
     int mid;
-
+    
     public void addNum(int num) {
-        if (size== 0) {
-            arr.add(num);
+        if (smallSize == 0) {
             mid = num;
-            size += 1;
+            min.add(num);
+            smallSize += 1;
             return;
         }
-        if(mid<= num){
-            int index = size-1;
-            while(num < arr.get(index)){
-                index -= 1;
-            }
-            if(index == size-1)
-                {arr.add(num);}
-            else
-                {arr.add(index+1, num);}
+        if( mid < num){
+            max.add(num);
+            bigSize += 1;
         } else {
-            int index = 0;
-            while(num > arr.get(index)){
-                index += 1;
-            }
-            arr.add(index, num);
+            min.add(num);
+            smallSize += 1;
         }
-        size += 1;
+        
+        if(smallSize < bigSize){
+            min.add(max.poll());
+            bigSize -= 1;
+            smallSize += 1;
+        } else if (smallSize >= bigSize + 2){
+            max.add(min.poll());
+            smallSize -= 1;
+            bigSize += 1;
+        }
+        mid = min.peek();
     }
     
     public double findMedian() {
-        int mid = (size - 1)/2;
-        if(size %2 == 0){
-            return (arr.get(mid) + arr.get(mid+1))/2.0;
+        
+        if((smallSize + bigSize) %2 == 0){
+            return (mid + max.peek())/2.0;
         } else {
-            return arr.get(mid);
+            return mid;
         }
     }
 }
