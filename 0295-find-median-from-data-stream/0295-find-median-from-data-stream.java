@@ -3,10 +3,6 @@ class MedianFinder {
     int size= 0;
     int mid;
 
-    public MedianFinder() {
-        
-    }
-    
     public void addNum(int num) {
         if (size== 0) {
             arr.add(num);
