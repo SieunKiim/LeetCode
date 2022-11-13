@@ -5,8 +5,9 @@ class Solution {
         StringTokenizer st = new StringTokenizer(s);
         while(st.hasMoreTokens()){
             
-            sb.insert(0, st.nextToken()+ " ");
+            sb.insert(0, st.nextToken() + " ");
         }
+        
         sb.deleteCharAt(sb.length()-1);
         return sb.toString();
     }
