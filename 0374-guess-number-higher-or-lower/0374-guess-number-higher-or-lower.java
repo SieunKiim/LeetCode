@@ -9,14 +9,14 @@
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
-        int left = 1; 
-        int right = n;
+        long left = 1; 
+        long right = n;
         while(left <= right){
-            // int mid = (left + right)/2;
-            int mid = left + (right - left)/2;
-            int guessResult = guess(mid);
+            long mid = (left + right)/2;
+            // long mid = left + (right - left)/2;
+            int guessResult = guess((int)mid);
             if(guessResult == 0) {
-                return mid;
+                return (int)mid;
             }
             if(guessResult == 1){
                 left = mid+1;
