@@ -3,11 +3,11 @@ class Solution {
         int n = nums.length;
         
         // long right = Arrays.stream(nums).sum();
-        long right = Arrays.stream(nums).mapToLong(i->i).sum();
-        // long right = 0;
-        // for(int num : nums){
-        //     right += num;
-        // }
+        // long right = Arrays.stream(nums).mapToLong(i->i).sum();
+        long right = 0;
+        for(int num : nums){
+            right += num;
+        }
         
         long left = 0;
         int compare = Integer.MAX_VALUE;
