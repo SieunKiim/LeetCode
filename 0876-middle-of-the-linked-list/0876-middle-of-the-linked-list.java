@@ -10,20 +10,12 @@
  */
 class Solution {
     public ListNode middleNode(ListNode head) {
-        int count = 0;
-        // ListNode root = new ListNode(0,head);
-        ListNode root = head;
-        while(head != null){
-            head = head.next;
-            count += 1;
+        ListNode left = head;
+        ListNode right = head;
+        while(right != null && right.next != null){
+            left = left.next;
+            right = right.next.next;
         }
-        // System.out.println(count);
-        count = count/2 + 1;
-        
-        while(count != 1){
-            root = root.next;
-            count -= 1;
-        }
-        return root;
+        return left;
     }
 }
