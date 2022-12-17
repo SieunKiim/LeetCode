@@ -7,7 +7,7 @@ class Solution {
         op.add("/");
         
         Stack<Integer> stack = new Stack<>();
-        
+
         for(String t : tokens){
             if (op.contains(t)) {
                 int a = stack.pop();
