@@ -4,8 +4,7 @@ class Solution {
     boolean[] visited;
     List<List<Integer>> paths;
     int[][] nodes;
-    
-    
+
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
         n = graph.length;
         paths = new ArrayList<>();
