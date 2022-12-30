@@ -4,7 +4,8 @@ class Solution {
     boolean[] visited;
     List<List<Integer>> paths;
     int[][] nodes;
-
+    
+    
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
         n = graph.length;
         paths = new ArrayList<>();
@@ -32,7 +33,8 @@ class Solution {
                 dfs(next, path);
             }
         }
-    
+        
+        
         visited[now] = false;
         path.remove(path.size()-1);
     }
