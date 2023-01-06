@@ -4,6 +4,7 @@ class Solution {
         for(int cost: costs){
             pq.add(cost);
         }
+        
         int count = 0;
         while(!pq.isEmpty() && pq.peek() <= coins){
             coins -= pq.poll();
