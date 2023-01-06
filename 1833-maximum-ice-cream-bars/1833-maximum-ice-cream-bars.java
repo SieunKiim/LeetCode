@@ -9,6 +9,7 @@ class Solution {
             coins -= pq.poll();
             count += 1;
         }
+        
         return count;
     }
 }
