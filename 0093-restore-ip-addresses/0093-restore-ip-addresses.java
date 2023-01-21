@@ -6,10 +6,8 @@ class Solution {
     public List<String> restoreIpAddresses(String s) {
         output = new ArrayList<>();
         if (s.length() > 12) return output;
-
         n = s.length();
         arr = s.toCharArray();
-
         progress(0, "", 0);
         return output;
     }
@@ -32,7 +30,6 @@ class Solution {
             else progress(index + i, chunk, chunkCount + 1);
         }
     }
-
 
     public String getChunk(int start, int end) {
         return String.valueOf(Arrays.copyOfRange(arr, start, end));
