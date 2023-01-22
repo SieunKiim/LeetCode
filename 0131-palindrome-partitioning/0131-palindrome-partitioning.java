@@ -1,7 +1,5 @@
 class Solution {
-    
     List<List<String>> output;
-    
     char[] preset;
     int n;
     
@@ -13,15 +11,12 @@ class Solution {
         return output;
     }
     
-    
     public void findString(int start, List<String> arr){
         if(start == n){
             output.add(new ArrayList<>(arr));
             return;
         }
-        
         int i = 1;
-        
         while(start + i <= n){
             String temp = String.valueOf(Arrays.copyOfRange(preset, start, start+i));
             if(checkPalindrome(temp)){
