@@ -30,11 +30,8 @@ class Solution {
         }
         
         List<Integer> temp = output.get(depth-1);
-        if(depth %2 != 0){
-            temp.add(head.val);
-        } else{
-            temp.add(0, head.val);
-        }
+        if(depth %2 != 0) temp.add(head.val);
+        else temp.add(0, head.val);
         dfs(head.left, depth+1);
         dfs(head.right, depth+1);
     }
