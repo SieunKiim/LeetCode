@@ -17,7 +17,6 @@ class Solution {
         for(int i = 0; i< lists.length; i++){
             ListNode head = lists[i];
             while(head != null){
-                // System.out.println(head.val);
                 putListNode(new ListNode(head.val));
                 head = head.next;
             }
