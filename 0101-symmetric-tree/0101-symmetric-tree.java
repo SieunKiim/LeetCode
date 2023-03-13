@@ -14,15 +14,38 @@
  * }
  */
 class Solution {
+    ArrayList<Integer> left;
+    ArrayList<Integer> right;
     public boolean isSymmetric(TreeNode root) {
-    return root==null || isSymmetricHelp(root.left, root.right);
-}
-
-    private boolean isSymmetricHelp(TreeNode left, TreeNode right){
-        if(left==null || right==null)
-            return left==right;
-        if(left.val!=right.val)
-            return false;
-        return isSymmetricHelp(left.left, right.right) && isSymmetricHelp(left.right, right.left);
+        left = new ArrayList<>();
+        right = new ArrayList<>();
+        
+        // if(root.right.val != root.left.val) return false;
+        checkLeft(root.left);
+        checkRight(root.right);
+        // System.out.println("left : "+ left);
+        // System.out.println("right : "+ right);
+        return left.equals(right);
+        
+    }
+    
+    public void checkLeft(TreeNode head){
+        if(head == null) {
+            left.add(null);
+            return;
+        }
+        left.add(head.val);
+        checkLeft(head.left);
+        checkLeft(head.right);
+    }
+    
+    public void checkRight(TreeNode head){
+        if(head == null) {
+            right.add(null);
+            return;
+        }        
+        right.add(head.val);
+        checkRight(head.right);
+        checkRight(head.left);
     }
 }
