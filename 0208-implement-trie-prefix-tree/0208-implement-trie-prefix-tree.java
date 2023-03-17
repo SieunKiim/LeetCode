@@ -15,7 +15,6 @@ class Trie {
         root = new TrieNode();
     }
 
-    // Inserts a word into the trie.
     public void insert(String word) {
         TrieNode findRoute = root;
         
