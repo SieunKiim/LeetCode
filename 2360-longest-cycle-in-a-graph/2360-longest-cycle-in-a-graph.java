@@ -1,31 +1,28 @@
 class Solution {
-    int answer = -1;
-
-    public void dfs(int node, int[] edges, Map<Integer, Integer> dist, boolean[] visit) {
-        visit[node] = true;
-        int neighbor = edges[node];
-
-        if (neighbor != -1 && !visit[neighbor]) {
-            dist.put(neighbor, dist.get(node) + 1);
-            dfs(neighbor, edges, dist, visit);
-        } else if (neighbor != -1 && dist.containsKey(neighbor)) {
-            answer = Math.max(answer, dist.get(node) - dist.get(neighbor) + 1);
-        }
-    }
-
     public int longestCycle(int[] edges) {
-        int n = edges.length;
-        boolean[] visit = new boolean[n];
+        int[] map = new int[edges.length];
+        int result = -1;
 
-        for (int i = 0; i < n; i++) {
-            if (!visit[i]) {
-                Map<Integer, Integer> dist = new HashMap<>();
-                dist.put(i, 1);
-                dfs(i, edges, dist, visit);
-            }
-        }
-        return answer;
+        for (int i = 0; i < edges.length; i++)
+            result = Math.max(result, helper(i, 1, edges, map));
+
+        return result;
     }
+
+    int helper(int index, int total, int[] edges, int[] map) {
+        if (index == -1 || map[index] == -1)
+            return -1;
+
+        if (map[index] != 0)
+            return total - map[index];
+
+        map[index] = total;
+        int result = helper(edges[index], total + 1, edges, map);
+        map[index] = -1;
+
+        return result;
+    }
+
 //     int[] cycleCount;
 //     int N;
 //     HashMap<Integer, Integer> map;
