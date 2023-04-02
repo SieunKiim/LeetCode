@@ -1,21 +1,28 @@
 class Solution {
     public int[] successfulPairs(int[] spells, int[] potions, long success) {
-        int n = potions.length;
-        int[] output = new int[spells.length];
-        int outputIndex = 0;
         Arrays.sort(potions);
-        System.out.println(Arrays.toString(potions));
-        // System.out.println("전체 길이 : "+ n);
-        for(int spell : spells){
-            int target = (int) Math.ceil((double)success/Long.valueOf(spell));
-            // int index = Arrays.binarySearch(potions, target);
-            int index = lowerBound(target, potions, 0,n);
-            // System.out.println("target : " + target + " index : " +index);
-            output[outputIndex] = (n-index+1);
-            // if(output[outputIndex] != 0) output[outputIndex] += 1;
-            outputIndex +=1;
-        }
-        return output;
+		TreeMap<Long, Integer> map = new TreeMap<>();
+        map.put(Long.MAX_VALUE, potions.length);
+		for (int i = potions.length - 1; i >= 0; i--) {
+			map.put((long) potions[i], i);
+		}
+		for (int i = 0; i < spells.length; i++) {
+            long need = (success + spells[i] - 1) / spells[i];
+			spells[i] = potions.length - map.ceilingEntry(need).getValue();
+		}
+		return spells;
+        // int n = potions.length;
+        // int[] output = new int[spells.length];
+        // int outputIndex = 0;
+        // Arrays.sort(potions);
+        // System.out.println(Arrays.toString(potions));
+        // for(int spell : spells){
+        //     int target = (int) Math.ceil((double)success/Long.valueOf(spell));
+        //     int index = lowerBound(target, potions, 0,n);
+        //     output[outputIndex] = (n-index+1);
+        //     outputIndex +=1;
+        // }
+        // return output;
     }
     
     public int lowerBound(int target, int[] potions, int start, int end){
