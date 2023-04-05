@@ -9,10 +9,10 @@ class Solution {
             int mean = (int) Math.ceil((double)sum/(i+1));
             if(mean <= nums[i]) output = Math.max(output, mean);
         }
+        
         return output;
         
-        
-        
+
         // 이분탐색 풀이
 //         int n = nums.length;
 //         int left = Integer.MAX_VALUE;
