@@ -8,9 +8,9 @@ class Solution {
             stack.push(pushed[i]);
             while(!stack.isEmpty() && stack.peek() == popped[popIndex] && popIndex < n){
                 stack.pop();
-                popIndex += 1;
+                popIndex++;
             }
         }
-        return stack.isEmpty() && popIndex == n;
+        return popIndex == n;
     }
 }
