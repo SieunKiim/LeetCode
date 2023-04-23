@@ -1,7 +1,7 @@
 class Solution {
     public int numberOfArrays(String s, int k) {
         int m = s.length(), n = String.valueOf(k).length();
-        int mod = 1_000_000_007;
+        int mod = 1000000007;
         
         int[] dp = new int[n + 1];
         
