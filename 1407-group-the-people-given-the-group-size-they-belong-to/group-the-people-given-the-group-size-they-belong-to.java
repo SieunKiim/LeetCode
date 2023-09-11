@@ -1,22 +1,34 @@
 class Solution {
     public List<List<Integer>> groupThePeople(int[] groupSizes) {
-        List<List<Integer>> ans = new ArrayList<>();
-        
-        Map<Integer, List<Integer>> szToGroup = new HashMap<>();
-        for (int i = 0; i < groupSizes.length; i++) {
-            if (!szToGroup.containsKey(groupSizes[i])) {
-                szToGroup.put(groupSizes[i], new ArrayList<>());
-            }
-            
-            List<Integer> group = szToGroup.get(groupSizes[i]);
-            group.add(i);
+        int n = groupSizes.length;
+        List<List<Integer>> output = new ArrayList<>();
+        boolean[] used = new boolean[n];
 
-            if (group.size() == groupSizes[i]) {
-                ans.add(group);
-                szToGroup.remove(groupSizes[i]);
+        for(int i = 1; i<=n;i++){
+            
+            List<Integer>temp = new ArrayList<>();
+            for(int j = 0; j<n;j++){
+                if(used[j] == false && groupSizes[j] == i){
+                    temp.add(j);
+                    used[j] = true;
+                }
+            }
+            if(temp.size() == 0){
+                continue;
+            }
+
+            List<Integer>temptemp = new  ArrayList<>();
+            for(int k = 0; k<temp.size();k++){
+                temptemp.add(temp.get(k));
+                if((k+1)%i == 0){
+                    output.add(temptemp);
+                    temptemp = new ArrayList<>();
+                }
             }
         }
 
-        return ans;
+        System.out.println(output);
+
+        return output;
     }
 }
