@@ -1,22 +1,23 @@
 import java.util.*;
 
 class SeatManager {
-    PriorityQueue<Integer> que;
+    PriorityQueue<Integer> refunded;
+    int seatNum;
 
     public SeatManager(int n) {
-        que = new PriorityQueue<>();
-        for(int i = 1; i<=n ;i++){
-            que.offer(i);
-        }
+        refunded = new PriorityQueue<>();
+        seatNum = 0;
     }
     
     public int reserve() {
-
-        return que.poll();
+        if(refunded.isEmpty()){
+            return ++seatNum;
+        }
+        return refunded.poll();
     }
     
     public void unreserve(int seatNumber) {
-        que.offer(seatNumber);
+        refunded.offer(seatNumber);
     }
 }
 
