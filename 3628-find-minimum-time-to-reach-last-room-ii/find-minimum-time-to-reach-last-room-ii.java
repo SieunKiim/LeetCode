@@ -1,66 +1,44 @@
 class Solution {
-    int[] dx = new int[] {-1, 0, 1, 0};
-    int[] dy = new int[] {0, -1, 0, 1};
-    int n;
-    int m;
-    int[][] dp;
-
-    class Node{
-        int i;
-        int j;
-        int val;
-        int step;
-
-        public Node(int i, int j, int val, int step){
-            this.i = i;
-            this.j = j;
-            this.val = val;
-            this.step = step;
+   static public int minTimeToReach(int[][] moveTime) {
+        int r = moveTime.length, c = moveTime[0].length;
+        int[][] minimumTime = new int[r][c];
+        for (int[] is : minimumTime) {
+            Arrays.fill(is, Integer.MAX_VALUE);
         }
 
-        public int nextVal(){
-            return this.val+ this.step;
-        }
+        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.steps - b.steps);
+        pq.add(new Pair(-1, 0, 0,1));
+        minimumTime[0][0] = 0;
 
-        public int nextStep(){
-            return (step % 2) + 1;
+        while (!pq.isEmpty()) {
+            Pair top = pq.poll();
+            int i = top.i, j = top.j,  move = top.move, nextStep = top.steps;
+            if (i + 1 < r) update(i + 1, j, pq, nextStep, moveTime, minimumTime, move);
+            if (i - 1 >= 0) update(i - 1, j, pq, nextStep, moveTime, minimumTime, move);
+            if (j - 1 >= 0) update(i, j - 1, pq, nextStep, moveTime, minimumTime, move);
+            if (j + 1 < c)  update(i, j + 1, pq, nextStep, moveTime, minimumTime, move);
+            if(minimumTime[r-1][c-1] != Integer.MAX_VALUE) return minimumTime[r-1][c-1];
+        }
+        return -1;
+    }
+
+    static void update(int i, int j, PriorityQueue<Pair> pq, int nextStep, int[][] moveTime, int[][] minimumTime,int move){
+        nextStep =  move + Math.max(nextStep, moveTime[i][j]);
+        if (minimumTime[i][j] > nextStep) {
+            pq.add(new Pair(nextStep, i, j, (move == 1 ? 2 : 1)));
+            minimumTime[i][j] = nextStep;
         }
     }
 
-    public int minTimeToReach(int[][] moveTime) {
-        n = moveTime.length;
-        m = moveTime[0].length;
-        dp = new int[n][m];
-        for(int i =0 ;i<n ;i++){
-            Arrays.fill(dp[i], Integer.MAX_VALUE);
-        }
+}
 
+class Pair {
+    int steps = 0, i = -1, j = -1,move;
 
-        PriorityQueue<Node> que = new PriorityQueue<>((o1, o2) -> o1.val-o2.val);
-        dp[0][0] = 0;
-        que.add(new Node(0,0,0,1));
-
-        while(!que.isEmpty()){
-
-            Node now = que.poll();
-            if(now.i == n-1 && now.j == m-1){
-                break;
-            }
-
-            // interval = (interval % 2) + 1;
-            for(int d= 0; d< 4;d++){
-                int ni = now.i + dx[d];
-                int nj = now.j + dy[d];
-                if(canGo(ni,nj) && now.nextVal() < dp[ni][nj]){
-                    dp[ni][nj] = Math.max(now.nextVal(), moveTime[ni][nj] + now.step);
-                    que.add(new Node(ni, nj, dp[ni][nj], now.nextStep()));
-                }
-            }
-        }
-        return dp[n-1][m-1];
-    }
-
-    private boolean canGo(int i, int j){
-        return 0<= i && i < n && 0 <= j && j < m;
+    public Pair(int steps, int i, int j,int move) {
+        this.steps = steps;
+        this.i = i;
+        this.j = j;
+        this.move = move;
     }
 }
