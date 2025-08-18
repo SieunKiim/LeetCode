@@ -12,7 +12,6 @@ class Solution {
 
     private boolean dfs(List<Double> arr){
         if(arr.size() == 1){
-            System.out.println(arr.get(0));
             return Math.abs(arr.get(0) - 24) < EPSILON;
         }
 
