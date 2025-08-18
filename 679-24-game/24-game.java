@@ -35,23 +35,12 @@ class Solution {
                 if(dfs(next))return true;
                 next.remove(next.size()-1);
 
-                next.add(b-a);
-                if(dfs(next))return true;
-                next.remove(next.size()-1);
-
                 next.add(a*b);
                 if(dfs(next))return true;
                 next.remove(next.size()-1);
 
                 if(Math.abs(b) > EPSILON){
                     next.add(a/b);
-                    if(dfs(next))return true;
-                    next.remove(next.size()-1);
-                }
-                
-                if(Math.abs(a) > EPSILON)
-                {
-                    next.add(b/a);
                     if(dfs(next))return true;
                     next.remove(next.size()-1);
                 }
