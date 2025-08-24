@@ -1,36 +1,35 @@
 class Solution {
     public int longestSubarray(int[] nums) {
         int n = nums.length;
-        List<Integer> arr= new ArrayList<>();
+        int start = 0;
+        int end = 0;
 
-        int count = 0;
-        for(int i =0 ;i<n;i++){
-            if(nums[i] == 1) {
-                count += 1;
-            } else {
-                if(count != 0){
-                    arr.add(count);
-                    count = 0;
+        int output = nums[0];
+        int zCount = 1-nums[0];
+        int oCount = nums[0];
+
+        while(start <= end && end < n-1 && start < n){
+            if(zCount <= 1){
+                end += 1;
+                if(nums[end] == 1){
+                    oCount += 1;
+                } else {
+                    zCount += 1;
                 }
-                arr.add(0);
+            } else {
+                start += 1;
+                if(nums[start-1] == 1){
+                    oCount -=1;
+                } else {
+                    zCount -=1;
+                }
             }
+            output = Math.max(output, oCount);
         }
-        if(count != 0){
-            arr.add(count);
-        }
-
-        if(arr.size() == 1){
-            return Math.max(0,arr.get(0) -1);
-        }
-
-        if(arr.size() == 2){
-            return arr.get(0) + arr.get(1);
-        }
-
-        int output= 0;
-        for(int i=0;i<arr.size()-2;i++){
-            output = Math.max(output , arr.get(i)+arr.get(i+1)+arr.get(i+2));
+        if(zCount == 0){
+            output-=1;
         }
         return output;
     }
+
 }
