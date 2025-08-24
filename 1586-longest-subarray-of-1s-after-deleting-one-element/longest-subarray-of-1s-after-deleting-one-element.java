@@ -12,22 +12,22 @@ class Solution {
             if(zCount <= 1){
                 end += 1;
                 if(nums[end] == 1){
-                    oCount += 1;
+                    oCount++;
                 } else {
-                    zCount += 1;
+                    zCount++;
                 }
             } else {
-                start += 1;
+                start++;
                 if(nums[start-1] == 1){
-                    oCount -=1;
+                    oCount--;
                 } else {
-                    zCount -=1;
+                    zCount--;
                 }
             }
             output = Math.max(output, oCount);
         }
         if(zCount == 0){
-            output-=1;
+            output--;
         }
         return output;
     }
