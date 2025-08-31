@@ -1,39 +1,56 @@
 class Solution {
+    int n = 3;
+    int N = n * n;
+    int[][] rows = new int[N][N + 1];
+    int[][] columns = new int[N][N + 1];
+    int[][] boxes = new int[N][N + 1];
+    char[][] board;
+    boolean sudokuSolved = false;
 
-  public  boolean solveSudoku(char[][] board) {
-    for (int i = 0; i < 9; i++) {
-      for (int j = 0; j < 9; j++) {
-        if (board[i][j] == '.') {
+    public boolean couldPlace(int d, int row, int col) {
+        int idx = (row / n) * n + col / n;
+        return rows[row][d] + columns[col][d] + boxes[idx][d] == 0;
+    }
 
-          for (char c = '1'; c <= '9'; c++) {
-            if (isValid(board, i, j, c)) {
-              board[i][j] = c;
+    public void placeNumber(int d, int row, int col) {
+        int idx = (row / n) * n + col / n;
+        rows[row][d]++;
+        columns[col][d]++;
+        boxes[idx][d]++;
+        board[row][col] = (char)(d + '0');
+    }
 
-              if (solveSudoku(board))
-                return true;
-              else
-                board[i][j] = '.';
+    public void removeNumber(int d, int row, int col) {
+        int idx = (row / n) * n + col / n;
+        rows[row][d]--;
+        columns[col][d]--;
+        boxes[idx][d]--;
+        board[row][col] = '.';
+    }
+
+    public void placeNextNumbers(int row, int col) {
+        if (row == N - 1 && col == N - 1) sudokuSolved = true;
+        else if (col == N - 1) backtrack(row + 1, 0);
+        else backtrack(row, col + 1);
+    }
+
+    public void backtrack(int row, int col) {
+        if (board[row][col] == '.') {
+            for (int d = 1; d <= 9; d++) {
+                if (couldPlace(d, row, col)) {
+                    placeNumber(d, row, col);
+                    placeNextNumbers(row, col);
+                    if (!sudokuSolved) removeNumber(d, row, col);
+                }
             }
-          }
-
-          return false;
-        }
-      }
+        } else placeNextNumbers(row, col);
     }
-    return true;
-  }
 
-  public  boolean isValid(char[][] board, int row, int col, char c) {
-    for (int i = 0; i < 9; i++) {
-      if (board[i][col] == c)
-        return false;
-
-      if (board[row][i] == c)
-        return false;
-
-      if (board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)
-        return false;
+    public void solveSudoku(char[][] board) {
+        this.board = board;
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                if (board[i][j] != '.') placeNumber(Character.getNumericValue(board[i][j]), i, j);
+        backtrack(0, 0);
     }
-    return true;
-  }
 }
