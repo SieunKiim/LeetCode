@@ -1,49 +1,54 @@
 class Solution {
 
     public double maxAverageRatio(int[][] classes, int extraStudents) {
-        // Lambda to calculate the gain of adding an extra student
-        PriorityQueue<double[]> maxHeap = new PriorityQueue<>((a, b) ->
-            Double.compare(b[0], a[0])
-        );
-
-        for (int[] singleClass : classes) {
-            int passes = singleClass[0];
-            int totalStudents = singleClass[1];
-            double gain = calculateGain(passes, totalStudents);
-            maxHeap.offer(new double[] { gain, passes, totalStudents });
+       class ClassInfo {
+            int pass, total;
+            double improvement;
+            
+            ClassInfo(int pass, int total) {
+                this.pass = pass;
+                this.total = total;
+                this.improvement = calculateImprovement();
+            }
+            
+            // 한 명의 brilliant student를 추가했을 때의 pass ratio 개선량 계산
+            // 공식: (total - pass) / (total * (total + 1))
+            double calculateImprovement() {
+                return (double)(total - pass) / ((long)total * (total + 1));
+            }
+            
+            // 학생 한 명 추가 후 개선량 재계산
+            void addStudent() {
+                pass++;
+                total++;
+                improvement = calculateImprovement();
+            }
         }
-
-        // Distribute extra students
-        while (extraStudents-- > 0) {
-            double[] current = maxHeap.poll();
-            double currentGain = current[0];
-            int passes = (int) current[1];
-            int totalStudents = (int) current[2];
-            maxHeap.offer(
-                new double[] {
-                    calculateGain(passes + 1, totalStudents + 1),
-                    passes + 1,
-                    totalStudents + 1,
-                }
-            );
+        
+        // 개선량 기준 최대 힙 (내림차순)
+        PriorityQueue<ClassInfo> pq = new PriorityQueue<>((a, b) -> 
+            Double.compare(b.improvement, a.improvement));
+        
+        // 모든 클래스를 힙에 추가
+        for (int[] cls : classes) {
+            pq.offer(new ClassInfo(cls[0], cls[1]));
         }
-
-        // Calculate the final average pass ratio
-        double totalPassRatio = 0;
-        while (!maxHeap.isEmpty()) {
-            double[] current = maxHeap.poll();
-            int passes = (int) current[1];
-            int totalStudents = (int) current[2];
-            totalPassRatio += (double) passes / totalStudents;
+        
+        // extraStudents만큼 반복하여 최적 배치
+        for (int i = 0; i < extraStudents; i++) {
+            ClassInfo best = pq.poll(); // 가장 큰 개선량을 주는 클래스 선택
+            best.addStudent(); // 학생 추가
+            pq.offer(best); // 업데이트된 정보로 다시 힙에 추가
         }
+        
+        // 최종 평균 pass ratio 계산
+        double sum = 0;
+        while (!pq.isEmpty()) {
+            ClassInfo cls = pq.poll();
+            sum += (double)cls.pass / cls.total;
+        }
+        
+        return sum / classes.length;
 
-        return totalPassRatio / classes.length;
-    }
-
-    private double calculateGain(int passes, int totalStudents) {
-        return (
-            (double) (passes + 1) / (totalStudents + 1) -
-            (double) passes / totalStudents
-        );
     }
 }
