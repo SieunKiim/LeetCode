@@ -7,7 +7,6 @@ class Solution {
         while(temp > 0){
             temp -= (long)num2;
             int minTemp =  Long.bitCount(temp);
-            System.out.println("minTemp : "+minTemp + " count : " + count + " temp : " + temp);
             if(minTemp > 0 && count >= minTemp && count <= temp) return count;
             count += 1;
         }
