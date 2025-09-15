@@ -5,7 +5,6 @@ class Solution {
             .mapToObj(c -> (char) c)
             .collect(Collectors.toSet());
         int count = 0;
-        System.out.println(set);
         for(String word : arr){
             char[] temp = word.toCharArray();
             for(char c : temp){
