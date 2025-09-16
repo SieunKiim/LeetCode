@@ -1,26 +1,48 @@
 class Solution {
     public List<Integer> replaceNonCoprimes(int[] nums) {
-        List<Integer> stack = new ArrayList<>();
-        
-        for (int num : nums) {
-            while (!stack.isEmpty()) {
-                int top = stack.get(stack.size() - 1);
-                int g = gcd(top, num);
-                if (g == 1) {
-                    break;
-                }
-                // merge top with current num (via LCM)
-                stack.remove(stack.size() - 1);
-                num = (top / g) * num;  // safer LCM
-            }
-            stack.add(num);
+        List<Integer> t = new ArrayList<>();
+        for(int n : nums){
+            t.add(n);
         }
-        
-        return stack;
+        return temp(t);
     }
-    
+
+    private List<Integer> temp(List<Integer> nums){
+        List<Integer> output = new ArrayList<>();
+        long val = nums.get(0);
+        int index = 1;
+        while(index < nums.size()){
+            int temp = gcd((int)val, nums.get(index));
+            // System.out.println("temp : " + temp);
+            if(temp != 1){
+                val = val * nums.get(index) / temp;
+
+                while(!output.isEmpty()){
+                    int temp2 = gcd((int)val, output.get(output.size()-1));
+                    if(temp2 != 1){
+                        val = val * output.get(output.size()-1) / temp2;
+                        output.remove(output.size()-1);
+                    }else {
+                        break;
+                    }
+                }
+            } else {
+                output.add((int)val);
+                // System.out.println("index : " +index + ", val : " + val);
+                val = nums.get(index);
+            }
+            index += 1;
+        }
+        output.add((int)val);
+        return output;
+    }
+
     private int gcd(int a, int b) {
-        if (b == 0) return a;
-        return gcd(b, a % b);
+        while (b != 0) {
+            int r = a % b;
+            a = b;
+            b = r;
+        }
+        return a;
     }
 }
