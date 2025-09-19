@@ -1,50 +1,26 @@
 class Spreadsheet {
 
-    HashMap<Integer, int[]> sheet;
+    HashMap<String, Integer> sheet;
 
     public Spreadsheet(int rows) {
         sheet = new HashMap<>();
-        for(int i =0;i<26;i++){
-            sheet.put(i, new int[rows+1]);
-        }
     }
     
     public void setCell(String cell, int value) {
-        int cellIndex = cell.charAt(0)-'A';
-        int[] arr = sheet.get(cellIndex);
-        int cellNum = Integer.parseInt(cell.substring(1));
-        arr[cellNum] = value;
-        sheet.put(cellIndex, arr);
+        sheet.put(cell, value);
     }
     
     public void resetCell(String cell) {
-        int cellIndex = cell.charAt(0)-'A';
-        int[] arr = sheet.get(cellIndex);
-        int cellNum = Integer.parseInt(cell.substring(1));
-        arr[cellNum] = 0;
-        sheet.put(cellIndex, arr);
+        sheet.remove(cell);
     }
     
     public int getValue(String formula) {
-        String raw = formula.substring(1);
-        System.out.println(raw);
-        String[] cuttedFormula = raw.split("\\+");
-        int a = getVal(cuttedFormula[0]);
-        int b = getVal(cuttedFormula[1]);
+        int index = formula.indexOf('+');
+        String cell1 = formula.substring(1,index);
+        String cell2 = formula.substring(index+1);
+        int a = Character.isLetter(cell1.charAt(0)) ? sheet.getOrDefault(cell1,0) : Integer.parseInt(cell1);
+        int b= Character.isLetter(cell2.charAt(0)) ? sheet.getOrDefault(cell2,0) : Integer.parseInt(cell2);
         return a+b;
-    }
-
-    private Integer getVal(String s){
-        Integer output = -1;
-        try{
-            output = Integer.parseInt(s);
-        } catch(Exception e){
-            int cellIndex = s.charAt(0)-'A';
-            int[] arr = sheet.get(cellIndex);
-            int temp =Integer.parseInt(s.substring(1));
-            output = arr[temp];
-        }
-        return output;
     }
 }
 
