@@ -21,23 +21,20 @@ class Solution {
             row2.put(u, Math.min(weight2, w * 2));
             map.put(v, row2);
 
-            // map[u][v] = Math.min(w, map[u][v]);
-            // map[v][u] = Math.min(w * 2,map[v][u]);
         }
-        // System.out.println(map);
 
-        Deque<Integer> que = new ArrayDeque<>();
-        que.add(0);
+        PriorityQueue<int[]> que = new PriorityQueue<>((o1,o2)->o1[1]-o2[1]);
+        que.add(new int[]{0,0});
         output[0] = 0;
         while(!que.isEmpty()){
-            int now = que.poll();
-            HashMap<Integer, Integer> row = map.getOrDefault(now, null);
+            int[] now = que.poll();
+            HashMap<Integer, Integer> row = map.getOrDefault(now[0], null);
             if(row == null) continue;
             for(int next : row.keySet()){
                 int tempWeight = row.get(next);
-                if(tempWeight + output[now] < output[next]){
-                    output[next] = tempWeight + output[now];
-                    que.add(next);
+                if(tempWeight + now[1] < output[next]){
+                    output[next] = tempWeight + output[now[0]];
+                    que.add(new int[]{next, output[next]});
                 }
             }
         }
