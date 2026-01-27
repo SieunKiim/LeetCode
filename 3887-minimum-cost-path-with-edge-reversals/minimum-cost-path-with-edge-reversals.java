@@ -28,6 +28,7 @@ class Solution {
         output[0] = 0;
         while(!que.isEmpty()){
             int[] now = que.poll();
+            if (now[0] == n-1) return now[1];
             HashMap<Integer, Integer> row = map.getOrDefault(now[0], null);
             if(row == null) continue;
             for(int next : row.keySet()){
