@@ -1,26 +1,29 @@
 class Solution {
     public int numSteps(String s) {
-        int l = s.length() - 1;
-        int carry = 0;
+        int n = s.length()-1;
+        boolean up = false;
         int count = 0;
-        
-        while (l > 0) {
-            if (Character.getNumericValue(s.charAt(l)) + carry == 0) {
-                carry = 0;
-                count++;
-            } else if (Character.getNumericValue(s.charAt(l)) + carry == 2) {
-                carry = 1;
-                count++;
-            } else {
-                carry = 1;
-                count += 2;
+        while(n >0){
+            char now = s.charAt(n);
+            if(up){
+                now += 1;
+                up = false;
             }
-            l--;
+
+            if(now == '2'){
+                up = true;
+                now = '0';
+            }
+
+            count += 1;
+
+            if(now == '1'){
+                count += 1;
+                up = true;
+            }
+            n-=1;
         }
-        if (carry == 1) {
-            count++;
-        }
-        
+        if (up) count += 1;
         return count;
     }
 }
